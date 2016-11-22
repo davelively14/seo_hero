@@ -38,15 +38,19 @@ defmodule SeoHero.Results do
   end
 
   defp parse(responses) do
-    # result |> List.first |> Floki.raw_html |> Floki.find("cite") |> List.first |> elem(2)
-    citation_result =
-      for resp <- responses do
-        if element = resp |> Floki.find("cite") |> List.first do
-          element |> elem(2) |> flatten_citation
-        end
-      end
+    responses = responses |> List.delete_at(1)
 
-    citation_result |> List.delete(nil)
+    for resp <- responses do
+      citation =
+        resp |> Floki.find("cite") |> List.first |> elem(2) |> flatten_citation
+
+      url =
+        resp |> Floki.find("h3.r") |> Floki.find("a")
+        |> Floki.attribute("href") |> List.first |> String.split("?q=")
+        |> Enum.at(1) |> String.split("&") |> List.first
+
+      %{domain: citation, url: url}
+    end
   end
 
   # Will flatten a citation in order to any weird formatting.
@@ -62,7 +66,9 @@ defmodule SeoHero.Results do
   end
   defp flatten_citation([head | tail], result), do: flatten_citation(tail, result <> head)
 
-  # Will reduce the entire url to just the domain without the protocol
+  # Will reduce the entire url to just the domain without all the protocol.
+  # Ex: https://www.seroundtable.com/wix-seo-hero-challenge-23020.html
+  # Becomes: www.seroundtable.com
   defp domain_only(result) do
     case length(result = result |> String.split("//")) do
       1 ->
