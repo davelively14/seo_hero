@@ -6,20 +6,24 @@ defmodule SeoHero.Results do
   # API #
   #######
 
+  # Will use defaults to get the SeoHero data.
   def fetch_data do
     HTTPoison.get!(@default_url, %{}, stream_to: self)
     receive_results(@default_syntax)
   end
 
+  # Allows user to specific which syntax and which url to go after.
   def fetch_data(syntax, url \\ @default_url) do
     HTTPoison.get!(url, %{}, stream_to: self)
     receive_results(syntax)
   end
 
-  #####################
-  # Private Functions #
-  #####################
+  #############
+  # Callbacks #
+  #############
 
+  # Server type of a function. Loops until it receives the relevant chunk of
+  # data with the correct search results.
   defp receive_results(syntax) do
     receive do
       %HTTPoison.AsyncChunk{chunk: chunk} ->
@@ -37,12 +41,22 @@ defmodule SeoHero.Results do
     end
   end
 
+  #####################
+  # Private Functions #
+  #####################
+
+  # Will take the chunk with relevant information and parse it. Returns a list
+  # of result maps, each containing the domain name and url.
   defp parse(responses) do
     responses = responses |> List.delete_at(1)
 
     for resp <- responses do
       citation =
-        resp |> Floki.find("cite") |> List.first |> elem(2) |> flatten_citation
+        case cite = resp |> Floki.find("cite") |> List.first do
+          nil ->
+            nil
+          _ -> cite |> elem(2) |> flatten_citation
+        end
 
       url =
         resp |> Floki.find("h3.r") |> Floki.find("a")
