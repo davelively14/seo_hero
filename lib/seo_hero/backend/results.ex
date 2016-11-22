@@ -23,11 +23,12 @@ defmodule SeoHero.Results do
   defp receive_results(syntax) do
     receive do
       %HTTPoison.AsyncChunk{chunk: chunk} ->
-        case resp = Floki.find(chunk, syntax) do
+        case responses = Floki.find(chunk, syntax) do
           [] ->
             receive_results(syntax)
           _ ->
-            resp
+            parse(responses)
+            # responses
         end
       %HTTPoison.AsyncEnd{id: _} ->
         {:error}
@@ -36,7 +37,38 @@ defmodule SeoHero.Results do
     end
   end
 
-  defp parse do
+  defp parse(responses) do
+    # result |> List.first |> Floki.raw_html |> Floki.find("cite") |> List.first |> elem(2)
+    citation_result =
+      for resp <- responses do
+        if element = resp |> Floki.raw_html |> Floki.find("cite") |> List.first do
+          element |> elem(2) |> flatten_citation
+        end
+      end
 
+    citation_result |> List.delete(nil)
+  end
+
+  # Will flatten a citation in order to any weird formatting.
+  # Ex: ["https://www.seroundtable.com/wix-", {"b", [], ["seo"]}, "-", {"b", [], ["hero"]}, "-challenge-23020.html"]
+  # Becomes: "https://www.seroundtable.com/wix-seo-hero-challenge-23020.html"
+  defp flatten_citation(citation), do: flatten_citation(citation, "")
+  defp flatten_citation([], result) do
+    if result, do: domain_only(result)
+  end
+  defp flatten_citation([head | tail], result) when is_tuple(head) do
+    new_element = head |> elem(2) |> List.first
+    flatten_citation(tail, result <> new_element)
+  end
+  defp flatten_citation([head | tail], result), do: flatten_citation(tail, result <> head)
+
+  # Will reduce the entire url to just the domain without the protocol
+  defp domain_only(result) do
+    case length(result = result |> String.split("//")) do
+      1 ->
+        result |> List.first |> String.split("/") |> List.first
+      _ ->
+        result |> Enum.at(1) |> String.split("/") |> List.first
+    end
   end
 end
