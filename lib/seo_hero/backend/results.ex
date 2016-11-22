@@ -48,23 +48,24 @@ defmodule SeoHero.Results do
   # Will take the chunk with relevant information and parse it. Returns a list
   # of result maps, each containing the domain name and url.
   defp parse(responses) do
-    responses = responses |> List.delete_at(1)
+    results =
+      for resp <- responses do
+        citation =
+          case cite = resp |> Floki.find("cite") |> List.first do
+            nil ->
+              nil
+            _ -> cite |> elem(2) |> flatten_citation
+          end
 
-    for resp <- responses do
-      citation =
-        case cite = resp |> Floki.find("cite") |> List.first do
-          nil ->
-            nil
-          _ -> cite |> elem(2) |> flatten_citation
-        end
+        url =
+          resp |> Floki.find("h3.r") |> Floki.find("a")
+          |> Floki.attribute("href") |> List.first |> String.split("?q=")
+          |> Enum.at(1) |> String.split("&") |> List.first
 
-      url =
-        resp |> Floki.find("h3.r") |> Floki.find("a")
-        |> Floki.attribute("href") |> List.first |> String.split("?q=")
-        |> Enum.at(1) |> String.split("&") |> List.first
+        %{domain: citation, url: url}
+      end
 
-      %{domain: citation, url: url}
-    end
+    results |> Enum.filter(&(&1.domain != nil))
   end
 
   # Will flatten a citation in order to any weird formatting.
