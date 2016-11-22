@@ -13,7 +13,7 @@ defmodule SeoHero.Results do
   end
 
   # Allows user to specific which syntax and which url to go after.
-  def fetch_data(syntax, url \\ @default_url) do
+  def fetch_data(url, syntax \\ @default_syntax) do
     HTTPoison.get!(url, %{}, stream_to: self)
     receive_results(syntax)
   end
