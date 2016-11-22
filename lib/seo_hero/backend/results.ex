@@ -41,7 +41,7 @@ defmodule SeoHero.Results do
     # result |> List.first |> Floki.raw_html |> Floki.find("cite") |> List.first |> elem(2)
     citation_result =
       for resp <- responses do
-        if element = resp |> Floki.raw_html |> Floki.find("cite") |> List.first do
+        if element = resp |> Floki.find("cite") |> List.first do
           element |> elem(2) |> flatten_citation
         end
       end
