@@ -1,11 +1,11 @@
-defmodule SeoHero.ResultsTest do
+defmodule SeoHero.FidoTest do
   use SeoHero.ConnCase
-  alias SeoHero.Results
+  alias SeoHero.Fido
 
   setup config do
     cond do
       config[:fetch_data] ->
-        results = Results.fetch_data
+        results = Fido.fetch_data
         {:ok, results: results}
     end
   end

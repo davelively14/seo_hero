@@ -1,6 +1,6 @@
 defmodule SeoHero.Server do
   use GenServer
-  alias SeoHero.Results
+  alias SeoHero.Fido
 
   @default_time 2 * 60 * 60 * 1_000
 
@@ -18,16 +18,17 @@ defmodule SeoHero.Server do
 
   # On start, will fetch data from Google and store it in the Repo
   # TODO do we want the server to maintain state or repo?
-  def init(state) do
-    Results.fetch_data
+  def init(_state) do
+    new_state = Fido.fetch_data
+
     schedule_fetch
 
-    {:ok, state}
+    {:ok, new_state}
   end
 
   # When we receive :fetch, we will fetch_data and then reschedule fetch again
   def handle_info(:fetch, state) do
-    Results.fetch_data
+    Fido.fetch_data
     schedule_fetch
 
     {:noreply, state}

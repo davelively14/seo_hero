@@ -1,4 +1,4 @@
-defmodule SeoHero.Results do
+defmodule SeoHero.Fido do
   @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8"
   @default_syntax "div.g"
 

@@ -24,5 +24,5 @@ This will pull the first page results from a given search on Google. The default
   - Ensure no nil values for domain
 - Built Supervisor function that is started by seo_hero.ex (i.e. on start of app)
   - ADD: server.ex
-    - Server will schedule hourly result pulls via `SeoHero.Results.get_data` and store in repo
+    - Server will schedule hourly result pulls via `SeoHero.Fido.fetch_data` and store in repo
     - Click [here](http://stackoverflow.com/questions/32085258/how-to-run-some-code-every-few-hours-in-phoenix-framework) for example of how to setup the schedule
