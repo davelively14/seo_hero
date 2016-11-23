@@ -68,7 +68,6 @@ defmodule SeoHero.Server do
 
   # Stores each result in the Repo and associates it with a ResultCollection
   defp store_result(result, collection) do
-    IO.inspect result
     collection
     |> Ecto.build_assoc(:results)
     |> Result.changeset(result)
