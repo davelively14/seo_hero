@@ -9,7 +9,7 @@ defmodule SeoHero.Server do
   #######
 
   def start_link do
-    Supervisor.start_link(__MODULE__, %{})
+    GenServer.start_link(__MODULE__, %{})
   end
 
   #############
@@ -17,6 +17,7 @@ defmodule SeoHero.Server do
   #############
 
   # On start, will fetch data from Google and store it in the Repo
+  # TODO do we want the server to maintain state or repo?
   def init(state) do
     Results.fetch_data
     schedule_fetch
