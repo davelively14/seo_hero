@@ -101,7 +101,7 @@ defmodule SeoHero.Fido do
   # us from trying to run List.first on any nil values.
   defp get_snippet(snip) do
     if snip = List.first(snip) do
-      snip |> elem(2) |> plain_text
+      snip |> elem(2) |> plain_text |> String.split("\n") |> List.to_string
     end
   end
 
