@@ -73,7 +73,7 @@ defmodule SeoHero.Fido do
   # Will convert an HTML formatted element from Floki.find to a simple string.
   # Ex: ["https://www.seroundtable.com/wix-", {"b", [], ["seo"]}, "-", {"b", [], ["hero"]}, "-challenge-23020.html"]
   # Becomes: "https://www.seroundtable.com/wix-seo-hero-challenge-23020.html"
-  defp plain_text(citation), do: plain_text(citation, "")
+  defp plain_text(text), do: plain_text(text, "")
   defp plain_text([], result), do: result
   defp plain_text([head | tail], result) when is_tuple(head) do
     new_element = head |> elem(2) |> List.first
@@ -101,7 +101,7 @@ defmodule SeoHero.Fido do
   # us from trying to run List.first on any nil values.
   defp get_snippet(snip) do
     if snip = List.first(snip) do
-      snip |> elem(2) |> plain_text |> String.split("\n") |> List.to_string
+      snip = snip |> elem(2) |> plain_text |> String.replace("\n", "")
     end
   end
 
