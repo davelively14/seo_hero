@@ -1,19 +1,22 @@
 # SeoHero
 
-To start your Phoenix app:
+This will pull the first page results from a given search on Google. The default is to search for `seo hero` from the New York location, on Chrome, with no cookies. The intent is to provide a JSON API that will provide this data to third parties.
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Start Phoenix endpoint with `mix phoenix.server`
+## Todos
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+#### Version 0.0.1
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+- Build Supervisor function that is started by seo_hero.ex (i.e. on start of app)
+  - ADD: seo_hero_supervisor.ex
+    - Starts seo_hero_server on boot
+  - ADD: seo_hero_server.ex
+    - Server will schedule hourly result pulls via `SeoHero.Results.get_data` and store in repo
+    - Click [here](http://stackoverflow.com/questions/32085258/how-to-run-some-code-every-few-hours-in-phoenix-framework) for example of how to setup the schedule.
 
-## Learn more
+## Changelog
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+#### Version 0.0.1
+
+- Built library to pull data from google
+  - Established defaults
+  - API allows for fetch_data/0, fetch_data/1, and fetch_data/3
