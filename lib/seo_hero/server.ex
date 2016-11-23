@@ -12,6 +12,10 @@ defmodule SeoHero.Server do
     GenServer.start_link(__MODULE__, %{}, name: __MODULE__)
   end
 
+  def get_state do
+    GenServer.call(__MODULE__, :get_state)
+  end
+
   #############
   # Callbacks #
   #############
@@ -24,6 +28,10 @@ defmodule SeoHero.Server do
     schedule_fetch
 
     {:ok, new_state}
+  end
+
+  def handle_call(:get_state, _from, state) do
+    {:reply, state, state}
   end
 
   # When the server receives a :fetch call, it will fetch_data, store it in the
