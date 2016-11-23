@@ -8,14 +8,17 @@ Current version: 0.0.1ad
 
 #### Version 0.0.1
 
-- Store results in repo and update state upon receiving new results
-  - ADJ: server.ex to store results upon fetch_data and update state
 - Server will respond to requests for data
   - ADJ: server.ex
     - Add API that returns current rankings in JSON format
     - Add API that returns current rankings in HTML format
 - Build a test page to pull updated results
 - Build a view that will handle JSON requests
+
+#### Version 0.0.2
+
+- Find replacement for fetch_and_delete
+  - When deleting a result_collection, need to delete all the associated results
 
 ## Changelog
 
@@ -38,3 +41,4 @@ Current version: 0.0.1ad
 - Added results and result_collections tables to the Repo
 - Store results in repo and update state upon receiving new results
   - ADD: Result and ResultCollection models
+  - ADJ: server.ex to store results upon fetch_data and update state
