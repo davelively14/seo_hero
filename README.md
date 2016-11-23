@@ -9,7 +9,6 @@ Current version: 0.0.1ad
 #### Version 0.0.1
 
 - Store results in repo and update state upon receiving new results
-  - ADD: Result and ResultCollection models
   - ADJ: server.ex to store results upon fetch_data and update state
 - Server will respond to requests for data
   - ADJ: server.ex
@@ -37,3 +36,5 @@ Current version: 0.0.1ad
   - ADJ: seo_hero.ex
     - Added `supervisor(SeoHero.Supervisor, [])` to children that are started at launch.
 - Added results and result_collections tables to the Repo
+- Store results in repo and update state upon receiving new results
+  - ADD: Result and ResultCollection models
