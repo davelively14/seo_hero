@@ -14,7 +14,7 @@ defmodule SeoHero.Result do
   @required_fields ~w(rank domain url)
   @optional_fields ~w(snippet)
 
-  def changeset(model, params \\ :empty) do
+  def changeset(model, params \\ %{}) do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
