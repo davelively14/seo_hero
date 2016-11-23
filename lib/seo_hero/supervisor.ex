@@ -13,7 +13,7 @@ defmodule SeoHero.Supervisor do
   # Callbacks #
   #############
 
-  def init do
+  def init(_) do
     children = [
       worker(SeoHero.Server, [])
     ]
