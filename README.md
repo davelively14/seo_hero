@@ -22,3 +22,6 @@ This will pull the first page results from a given search on Google. The default
 - Built library to pull data from google
   - Established defaults
   - API allows for fetch_data/0, fetch_data/1, and fetch_data/3
+- Added tests
+  - Ensure length of results is alway 9 (always nine first page results)
+  - Ensure no nil values for domain
