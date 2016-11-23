@@ -84,7 +84,7 @@ defmodule SeoHero.Fido do
       plain_text(tail, result)
     end
   end
-  defp plain_text([head | tail], result), do: plain_text(tail, result <> head)
+  defp plain_text([head | tail], result), do: plain_text(tail, result <> clean(head))
 
   # Will reduce the entire url to just the domain without all the protocol.
   # Ex: https://www.seroundtable.com/wix-seo-hero-challenge-23020.html
