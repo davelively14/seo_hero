@@ -1,0 +1,18 @@
+<h2>All Results</h2>
+
+<table class="table">
+  <tr class="text-center">
+    <th>Date</th>
+    <th># Results</th>
+    <th></th>
+  </tr>
+  <%= for collection <- @collections do %>
+    <tr>
+      <td><%= collection.inserted_at |> Ecto.DateTime.to_string %></td>
+      <td><%= length(collection.results) %></td>
+      <td>
+        
+      </td>
+    </tr>
+  <% end %>
+</table>

@@ -77,8 +77,9 @@ defmodule SeoHero.Fido do
   defp plain_text([], result), do: result
   defp plain_text([head | tail], result) when is_tuple(head) do
     new_element = head |> elem(2) |> List.first
+    IO.inspect new_element
     if new_element do
-      plain_text(tail, result <> new_element)
+      plain_text(tail, result <> clean(new_element))
     else
       plain_text(tail, result)
     end
@@ -110,5 +111,15 @@ defmodule SeoHero.Fido do
   defp add_rank([head | tail], rank) do
     new_map = head |> Map.put(:rank, rank)
     [new_map | add_rank(tail, rank + 1)]
+  end
+
+  defp clean(data), do: clean(String.codepoints(data), "")
+  defp clean([], solution), do: solution
+  defp clean([head | tail], solution) do
+    if String.valid?(head) do
+      clean(tail, solution <> head)
+    else
+      clean(tail, solution)
+    end
   end
 end
