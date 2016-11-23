@@ -67,7 +67,7 @@ defmodule SeoHero.Fido do
         %{domain: citation, url: url, snippet: snippet}
       end
 
-    results |> Enum.filter(&(&1.domain != nil))
+    results |> Enum.filter(&(&1.domain != nil)) |> add_rank
   end
 
   # Will convert an HTML formatted element from Floki.find to a simple string.
@@ -103,5 +103,12 @@ defmodule SeoHero.Fido do
     if snip = List.first(snip) do
       snip |> elem(2) |> plain_text
     end
+  end
+
+  defp add_rank(results), do: add_rank(results, 1)
+  defp add_rank([], _rank), do: []
+  defp add_rank([head | tail], rank) do
+    new_map = head |> Map.put(:rank, rank)
+    [new_map | add_rank(tail, rank + 1)]
   end
 end

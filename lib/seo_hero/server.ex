@@ -1,6 +1,6 @@
 defmodule SeoHero.Server do
   use GenServer
-  alias SeoHero.Fido
+  alias SeoHero.{Fido, ResultCollection, Result, Repo}
 
   @default_time 2 * 60 * 60 * 1_000
 
@@ -26,9 +26,16 @@ defmodule SeoHero.Server do
     {:ok, new_state}
   end
 
-  # When we receive :fetch, we will fetch_data and then reschedule fetch again
+  # When the server receives a :fetch call, it will fetch_data, store it in the
+  # repo, reschedule through schedule_fetch, and updated the state with the
+  # newest results
   def handle_info(:fetch, state) do
-    Fido.fetch_data
+    new_results = Fido.fetch_data
+    collection = create_result_collection
+
+    new_results
+    |> Enum.each(&store_result(&1, collection))
+
     schedule_fetch
 
     {:noreply, state}
@@ -45,5 +52,22 @@ defmodule SeoHero.Server do
   # Sends self a message :fetch after specified or default amount of time
   defp schedule_fetch(time \\ @default_time) do
     Process.send_after(self, :fetch, time)
+  end
+
+  # Creates a new row in result_collection and returns that collection.
+  defp create_result_collection do
+    changeset =
+      %ResultCollection{}
+      |> ResultCollection.changeset
+
+    Repo.insert(changeset)
+  end
+
+  # Stores each result in the Repo and associates it with a ResultCollection
+  defp store_result(result, collection) do
+    changeset =
+      collection
+      |> Ecto.build_assoc(:results)
+      # |> Result.changeset(%Result{domain: })
   end
 end
