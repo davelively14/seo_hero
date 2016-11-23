@@ -1,5 +1,5 @@
-defmodule SeoHero.Supervisor do
-  use Supervisor
+defmodule SeoHero.Server do
+  use GenServer
   alias SeoHero.Results
 
   @default_time 2 * 60 * 60 * 1_000
