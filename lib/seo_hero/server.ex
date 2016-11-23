@@ -29,7 +29,7 @@ defmodule SeoHero.Server do
   # When the server receives a :fetch call, it will fetch_data, store it in the
   # repo, reschedule through schedule_fetch, and updated the state with the
   # newest results
-  def handle_info(:fetch, state) do
+  def handle_info(:fetch, _state) do
     new_state = get_data
     schedule_fetch
 
