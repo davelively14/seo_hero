@@ -54,7 +54,7 @@ defmodule SeoHero.Results do
           case cite = resp |> Floki.find("cite") |> List.first do
             nil ->
               nil
-            _ -> cite |> elem(2) |> flatten_citation
+            _ -> cite |> elem(2) |> plain_text |> domain_only
           end
 
         url =
@@ -62,24 +62,28 @@ defmodule SeoHero.Results do
           |> Floki.attribute("href") |> List.first |> String.split("?q=")
           |> Enum.at(1) |> String.split("&") |> List.first
 
-        %{domain: citation, url: url}
+        snippet = resp |> Floki.find("span.st") |> get_snippet
+
+        %{domain: citation, url: url, snippet: snippet}
       end
 
     results |> Enum.filter(&(&1.domain != nil))
   end
 
-  # Will flatten a citation in order to any weird formatting.
+  # Will convert an HTML formatted element from Floki.find to a simple string.
   # Ex: ["https://www.seroundtable.com/wix-", {"b", [], ["seo"]}, "-", {"b", [], ["hero"]}, "-challenge-23020.html"]
   # Becomes: "https://www.seroundtable.com/wix-seo-hero-challenge-23020.html"
-  defp flatten_citation(citation), do: flatten_citation(citation, "")
-  defp flatten_citation([], result) do
-    if result, do: domain_only(result)
-  end
-  defp flatten_citation([head | tail], result) when is_tuple(head) do
+  defp plain_text(citation), do: plain_text(citation, "")
+  defp plain_text([], result), do: result
+  defp plain_text([head | tail], result) when is_tuple(head) do
     new_element = head |> elem(2) |> List.first
-    flatten_citation(tail, result <> new_element)
+    if new_element do
+      plain_text(tail, result <> new_element)
+    else
+      plain_text(tail, result)
+    end
   end
-  defp flatten_citation([head | tail], result), do: flatten_citation(tail, result <> head)
+  defp plain_text([head | tail], result), do: plain_text(tail, result <> head)
 
   # Will reduce the entire url to just the domain without all the protocol.
   # Ex: https://www.seroundtable.com/wix-seo-hero-challenge-23020.html
@@ -90,6 +94,14 @@ defmodule SeoHero.Results do
         result |> List.first |> String.split("/") |> List.first
       _ ->
         result |> Enum.at(1) |> String.split("/") |> List.first
+    end
+  end
+
+  # Ensures a snippet is not blank. If it is, it will return nothing. Prevents
+  # us from trying to run List.first on any nil values.
+  defp get_snippet(snip) do
+    if snip = List.first(snip) do
+      snip |> elem(2) |> plain_text
     end
   end
 end
