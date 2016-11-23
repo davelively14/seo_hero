@@ -38,7 +38,7 @@ defmodule SeoHero.Server do
 
     schedule_fetch
 
-    {:noreply, state}
+    {:noreply, new_results}
   end
 
   def handle_info(_, state) do
@@ -56,18 +56,16 @@ defmodule SeoHero.Server do
 
   # Creates a new row in result_collection and returns that collection.
   defp create_result_collection do
-    changeset =
-      %ResultCollection{}
-      |> ResultCollection.changeset
-
-    Repo.insert(changeset)
+    %ResultCollection{}
+    |> ResultCollection.changeset
+    |> Repo.insert
   end
 
   # Stores each result in the Repo and associates it with a ResultCollection
   defp store_result(result, collection) do
-    changeset =
-      collection
-      |> Ecto.build_assoc(:results)
-      # |> Result.changeset(%Result{domain: })
+    collection
+    |> Ecto.build_assoc(:results)
+    |> Result.changeset(Map.merge(%Result{}, result))
+    |> Repo.insert
   end
 end
