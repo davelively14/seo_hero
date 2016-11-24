@@ -1,5 +1,20 @@
 <div class="jumbotron">
-  <%= @collection.inserted_at |> readable_date %>
+  <h3>Most Recent First Page Results</h3>
+  <table class="table">
+    <tr class="text-center">
+      <th class="text-center">Rank</th>
+      <th class="text-center">Domain</th>
+      <th class="text-center">Link</th>
+    </tr>
+    <%= for result <- @collection.results do %>
+      <tr title="<%= result.snippet %>">
+        <td><%= result.rank %></td>
+        <td><%= result.domain %></td>
+        <td><a href="<%= result.url %>"><%= result.url %></a></td>
+      </tr>
+    <% end %>
+  </table>
+  Last updated: <%= @collection.inserted_at |> readable_date %>
 </div>
 
 <div class="row marketing">
