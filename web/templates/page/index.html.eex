@@ -14,7 +14,7 @@
       </tr>
     <% end %>
   </table>
-  Last updated: <%= @collection.inserted_at |> readable_date %>
+  <strong>Last updated:</strong> <%= @collection.inserted_at |> readable_date %>
 </div>
 
 <div class="container">
@@ -34,7 +34,7 @@
         </tr>
       <% end %>
     </table>
-    Last updated: <%= @collection.inserted_at |> readable_date %>
+    <strong>Last updated:</strong> <%= @collection.inserted_at |> readable_date %>
   </textarea>
 </div>
 
