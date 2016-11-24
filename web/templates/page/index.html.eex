@@ -17,6 +17,27 @@
   Last updated: <%= @collection.inserted_at |> readable_date %>
 </div>
 
+<div class="container">
+  <h4>Copy this HTML to add to your own site</h4>
+  <textarea rows="3" cols="50" onclick="this.focus();this.select();">
+    <table class="table">
+      <tr class="text-center">
+        <th class="text-center">Rank</th>
+        <th class="text-center">Domain</th>
+        <th class="text-center">Link</th>
+      </tr>
+      <%= for result <- @collection.results do %>
+        <tr title="<%= result.snippet %>">
+          <td><%= result.rank %></td>
+          <td><%= result.domain %></td>
+          <td><a href="<%= result.url %>"><%= result.url %></a></td>
+        </tr>
+      <% end %>
+    </table>
+    Last updated: <%= @collection.inserted_at |> readable_date %>
+  </textarea>
+</div>
+
 <div class="row marketing">
   <div class="col-lg-6">
     <h4>Resources</h4>
