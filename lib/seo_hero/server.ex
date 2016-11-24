@@ -18,10 +18,6 @@ defmodule SeoHero.Server do
     GenServer.call(__MODULE__, :get_state)
   end
 
-  def get_json do
-    GenServer.call(__MODULE__, :get_json)
-  end
-
   #############
   # Callbacks #
   #############
@@ -38,11 +34,6 @@ defmodule SeoHero.Server do
 
   def handle_call(:get_state, _from, state) do
     {:reply, state, state}
-  end
-
-  def handle_call(:get_json, _from, state) do
-    json = 3
-    {:reply, json, state}
   end
 
   # When the server receives a :fetch call, it will fetch_data, store it in the
