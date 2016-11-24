@@ -74,7 +74,8 @@ defmodule SeoHero.Server do
     new_results
     |> Enum.each(&store_result(&1, collection))
 
-    new_results
+    collection
+    |> Repo.preload(:results)
   end
 
   # Creates a new row in result_collection and returns that collection.
