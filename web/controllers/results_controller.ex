@@ -21,4 +21,12 @@ defmodule SeoHero.ResultsController do
 
     redirect(conn, to: results_path(conn, :index))
   end
+
+  def show(conn, %{"id" => id}) do
+    collection =
+      ResultCollection
+      |> Repo.get(id)
+      |> Repo.preload(results: from(r in Result, order_by: [asc: r.rank]))
+    render conn, "show.html", collection: collection
+  end
 end
