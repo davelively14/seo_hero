@@ -1,10 +1,18 @@
 defmodule SeoHero.PageView do
   use SeoHero.Web, :view
 
+  #######
+  # API #
+  #######
+
   def readable_date(dtg) do
     {_, {{year, month, day}, {hour, minute, second, _}}} = Ecto.DateTime.dump(dtg)
-    "#{month}/#{day}/#{year} at #{hour |> two_digit}:#{minute |> two_digit}"
+    "#{month}/#{day}/#{year} at #{hour |> two_digit}:#{minute |> two_digit} GMT"
   end
+
+  #####################
+  # Private Functions #
+  #####################
 
   # Ensures we display two place values for an integer.
   # Input: 6
