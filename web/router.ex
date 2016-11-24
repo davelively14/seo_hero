@@ -17,7 +17,7 @@ defmodule SeoHero.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    resources "/results", ResultsController, only: [:index, :delete]
+    resources "/results", ResultsController, only: [:index, :delete, :show]
   end
 
   # Other scopes may use custom stacks.

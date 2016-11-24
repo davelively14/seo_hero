@@ -1,5 +1,6 @@
 defmodule SeoHero.Server do
   use GenServer
+  import Ecto.Query, only: [from: 2]
   alias SeoHero.{Fido, ResultCollection, Result, Repo}
 
   @default_time 2 * 60 * 60 * 1_000
@@ -74,8 +75,7 @@ defmodule SeoHero.Server do
     new_results
     |> Enum.each(&store_result(&1, collection))
 
-    collection
-    |> Repo.preload(:results)
+    Repo.preload collection, results: from(r in Result, order_by: [asc: r.rank])
   end
 
   # Creates a new row in result_collection and returns that collection.

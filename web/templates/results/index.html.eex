@@ -11,6 +11,7 @@
       <td><%= collection.inserted_at |> Ecto.DateTime.to_string %></td>
       <td><%= length(collection.results) %></td>
       <td>
+        <%= link "View", to: results_path(@conn, :show, collection.id), class: "btn btn-primary btn-xs" %>
         <%= link "Delete", to: results_path(@conn, :delete, collection.id), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
       </td>
     </tr>

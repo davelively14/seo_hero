@@ -1,0 +1,16 @@
+<h2>Results</h2>
+
+<table class="table">
+  <tr class="text-center">
+    <th>Rank</th>
+    <th>Domain</th>
+    <th>Link</th>
+  </tr>
+  <%= for result <- @collection.results do %>
+    <tr>
+      <td><%= result.rank %></td>
+      <td><%= result.domain %></td>
+      <td><a href="<%= result.url %>"><%= result.url %></a></td>
+    </tr>
+  <% end %>
+</table>
