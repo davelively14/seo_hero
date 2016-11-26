@@ -2,20 +2,22 @@
 
 This will pull the first page results from a given search on Google. The default is to search for `seo hero` from the New York location, on Chrome, with no cookies. The intent is to provide a JSON API that will provide this data to third parties.
 
-Current version: 0.0.1ad
+Current production version: 0.0.1
+
+Current development version: 1.0.0a
 
 ## Todos
 
-#### Version 0.0.1
+#### Version 1.0.0
 
 - Server will respond to requests for data
   - ADJ: server.ex
     - Add API that returns current rankings in JSON format
-    - Add API that returns current rankings in HTML format
 - Build a test page to pull updated results
 - Build a view that will handle JSON requests
+- Remove the logo
 
-#### Version 0.0.2
+#### Version 1.0.1
 
 - Find replacement for fetch_and_delete
   - When deleting a result_collection, need to delete all the associated results
@@ -42,3 +44,7 @@ Current version: 0.0.1ad
 - Store results in repo and update state upon receiving new results
   - ADD: Result and ResultCollection models
   - ADJ: server.ex to store results upon fetch_data and update state
+- Added results to main page
+  - ADD: HTML formatted results
+  - ADD: Textarea with HTML code
+    - Selects all on focus
