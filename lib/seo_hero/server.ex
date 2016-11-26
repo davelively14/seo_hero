@@ -3,7 +3,11 @@ defmodule SeoHero.Server do
   import Ecto.Query, only: [from: 2]
   alias SeoHero.{Fido, ResultCollection, Result, Repo}
 
-  @default_time 2 * 60 * 60 * 1_000
+  # 2 hours
+  # @default_time 2 * 60 * 60 * 1_000
+
+  # 38 minutes
+  @default_time 38 * 60 * 1_000
 
   #######
   # API #

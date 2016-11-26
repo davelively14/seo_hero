@@ -15,3 +15,6 @@ erl_crash.dump
 # variables.
 /config/prod.secret.exs
 /node_modules
+
+# Compiled JS
+web/static
