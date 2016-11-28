@@ -12,7 +12,7 @@ defmodule SeoHero.Server do
   # Default url list. Will ensure page one and two are returned in this ornder
   @default_urls [
     "https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york",
-    "https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york&start=10"
+    # "https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york&start=10"
   ]
 
   #######
@@ -70,7 +70,7 @@ defmodule SeoHero.Server do
   end
 
   defp get_data do
-    new_results = Fido.fetch_data
+    new_results = Fido.fetch_data(@default_urls)
     {:ok, collection} = create_result_collection
 
     new_results
