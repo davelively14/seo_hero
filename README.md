@@ -15,7 +15,6 @@ Current development version: 1.0.0a
     - Add API that returns current rankings in JSON format
 - Build a test page to pull updated results
 - Build a view that will handle JSON requests
-- Remove the logo
 
 #### Version 1.0.1
 
@@ -23,6 +22,10 @@ Current development version: 1.0.0a
   - When deleting a result_collection, need to delete all the associated results
 
 ## Changelog
+
+#### Version 1.0.0
+
+- Removed the Phoenix logo
 
 #### Version 0.0.1
 
