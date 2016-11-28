@@ -9,6 +9,12 @@ defmodule SeoHero.Server do
   # 38 minutes
   @default_time 38 * 60 * 1_000
 
+  # Default url list. Will ensure page one and two are returned in this ornder
+  @default_urls [
+    "https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york",
+    "https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york&start=10"
+  ]
+
   #######
   # API #
   #######
