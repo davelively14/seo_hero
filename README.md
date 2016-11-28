@@ -11,6 +11,10 @@ Current development version: 1.0.0a
 #### Version 1.0.0
 - Add second page results
   - Url is: [https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york&start=10](https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york&start=10)
+  - The key is to get all that results together, then call SeoHero.Fido.parse/1
+    - This will automatically add the correct ranking
+    - So, do we just call both HTTPoison requests at the same time? Not sure we can do that and ensure synchronous
+    - Might have to find another way, after gathering chunks from both side 
 
 #### Version 1.0.1
 
