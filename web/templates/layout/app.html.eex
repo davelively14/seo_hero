@@ -15,11 +15,10 @@
     <div class="container">
       <header class="header">
         <nav role="navigation">
-          <ul class="nav nav-pills pull-right">
+          <ol class="breadcrumb text-right">
             <li><%= link "Home", to: page_path(@conn, :index) %></li>
-          </ul>
+          </ol>
         </nav>
-        <span class="logo"></span>
       </header>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
