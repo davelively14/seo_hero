@@ -1,5 +1,5 @@
 defmodule SeoHero.Fido do
-  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8"
+  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york"
   @default_syntax "div.g"
 
   #######
@@ -77,7 +77,6 @@ defmodule SeoHero.Fido do
   defp plain_text([], result), do: result
   defp plain_text([head | tail], result) when is_tuple(head) do
     new_element = head |> elem(2) |> List.first
-    IO.inspect new_element
     if new_element do
       plain_text(tail, result <> clean(new_element))
     else
