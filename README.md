@@ -9,6 +9,10 @@ Current development version: 1.0.0a
 ## Todos
 
 #### Version 1.0.0
+- Add second page results
+  - Url is: [https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york&start=10](https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york&start=10)
+
+#### Version 1.0.1
 
 - Server will respond to requests for data
   - ADJ: server.ex
@@ -16,7 +20,7 @@ Current development version: 1.0.0a
 - Build a test page to pull updated results
 - Build a view that will handle JSON requests
 
-#### Version 1.0.1
+#### Version 1.0.2
 
 - Find replacement for fetch_and_delete
   - When deleting a result_collection, need to delete all the associated results
