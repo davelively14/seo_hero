@@ -6,7 +6,7 @@ defmodule SeoHero.PageView do
   #######
 
   def readable_date(dtg) do
-    {_, {{year, month, day}, {hour, minute, second, _}}} = Ecto.DateTime.dump(dtg)
+    {_, {{year, month, day}, {hour, minute, _, _}}} = Ecto.DateTime.dump(dtg)
     "#{month}/#{day}/#{year} at #{hour |> two_digit}:#{minute |> two_digit} GMT"
   end
 

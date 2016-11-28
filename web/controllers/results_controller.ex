@@ -1,6 +1,6 @@
 defmodule SeoHero.ResultsController do
   use SeoHero.Web, :controller
-  alias SeoHero.{Result, ResultCollection, Server}
+  alias SeoHero.{Result, ResultCollection}
 
   def index(conn, _params) do
     collections =
