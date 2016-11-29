@@ -2,6 +2,7 @@ defmodule SeoHero.ResultCollection do
   use SeoHero.Web, :model
 
   schema "result_collections" do
+    field :url, :string
     has_many :results, SeoHero.Result
 
     timestamps
