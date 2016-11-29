@@ -80,3 +80,7 @@ form.link, form.button {
     border-bottom: 0;
   }
 }
+
+.container-narrow {
+  margin: 0 15em;
+}
