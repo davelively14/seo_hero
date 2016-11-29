@@ -1,5 +1,5 @@
 defmodule SeoHero.Fido do
-  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york"
+  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&sourceid=chrome&ie=UTF-8&num=21"
   @default_syntax "div.g"
   @num_page_results 9
 
