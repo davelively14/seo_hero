@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container-narrow">
       <header class="header">
         <nav role="navigation">
           <ol class="breadcrumb text-right">
