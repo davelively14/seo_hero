@@ -2,13 +2,13 @@
 
 This will pull results for a given search on Google. The default is to search for `seo hero` from the New York location, on Chrome, with no cookies, and return the top 20 results. The intent is to provide a JSON API that will provide this data to third parties and a simple "select-copy-paste" HTML version for those who do not want to directly connect to a service that pulls ranking from Google.
 
-Current production version: 0.0.2
+Current production version: 0.1.0
 
 Current development version: 1.0.0a
 
 ## Todos
 
-#### Version 1.0.0
+#### Version 1.1.0
 
 - Server will respond to requests for data
   - ADJ: server.ex
@@ -26,6 +26,11 @@ Current development version: 1.0.0a
   - When deleting a result_collection, need to delete all the associated results
 
 ## Changelog
+
+#### Version 0.1.0
+
+- Displayed URL used to get results
+- Changed "link" alignment in table to "text-left"
 
 #### Version 0.0.2
 
