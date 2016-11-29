@@ -2,21 +2,13 @@
 
 This will pull the first page results from a given search on Google. The default is to search for `seo hero` from the New York location, on Chrome, with no cookies. The intent is to provide a JSON API that will provide this data to third parties.
 
-Current production version: 0.0.1
+Current production version: 0.0.2
 
 Current development version: 1.0.0a
 
 ## Todos
 
 #### Version 1.0.0
-- Add second page results
-  - Url is: [https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york&start=10](https://www.google.com/search?q=seo+hero&near=new+york,new+york&aqs=chrome..69i57.2804j0j9&sourceid=chrome&ie=UTF-8#q=seo+hero&near=new+york,new+york&start=10)
-  - The key is to get all that results together, then call SeoHero.Fido.parse/1
-    - This will automatically add the correct ranking
-    - So, do we just call both HTTPoison requests at the same time? Not sure we can do that and ensure synchronous
-    - Might have to find another way, after gathering chunks from both side 
-
-#### Version 1.0.1
 
 - Server will respond to requests for data
   - ADJ: server.ex
@@ -24,16 +16,17 @@ Current development version: 1.0.0a
 - Build a test page to pull updated results
 - Build a view that will handle JSON requests
 
-#### Version 1.0.2
+#### Version 1.0.1
 
 - Find replacement for fetch_and_delete
   - When deleting a result_collection, need to delete all the associated results
 
 ## Changelog
 
-#### Version 1.0.0
+#### Version 0.0.2
 
 - Removed the Phoenix logo
+- Added top 20 results
 
 #### Version 0.0.1
 
