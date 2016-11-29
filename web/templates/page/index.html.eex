@@ -10,11 +10,21 @@
       <tr title="<%= result.snippet %>">
         <td><%= result.rank %></td>
         <td><%= result.domain %></td>
-        <td><a href="<%= result.url %>"><%= result.url %></a></td>
+        <td class="text-left"><a href="<%= result.url %>"><%= result.url %></a></td>
       </tr>
     <% end %>
   </table>
   <strong>Last updated:</strong> <%= @collection.inserted_at |> readable_date %>
+  <br>
+  <br>
+  <p>
+    <strong>URL used: </strong>
+    <%= if @collection.url do %>
+      <a href="<%= @collection.url %>" title="<%= @collection.url %>">Click or hover here</a>
+    <%= else %>
+      No url provided
+    <%= end %>
+  </p>
 </div>
 
 <div class="container">
@@ -35,6 +45,16 @@
       <% end %>
     </table>
     <strong>Last updated:</strong> <%= @collection.inserted_at |> readable_date %>
+    <br>
+    <br>
+    <p>
+      <strong>URL used: </strong>
+      <%= if @collection.url do %>
+        <a href="<%= @collection.url %>" title="<%= @collection.url %>">Click or hover here</a>
+      <%= else %>
+        No url provided
+      <%= end %>
+    </p>
   </textarea>
 </div>
 

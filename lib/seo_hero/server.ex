@@ -9,6 +9,8 @@ defmodule SeoHero.Server do
   # 38 minutes
   @default_time 38 * 60 * 1_000
 
+  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&sourceid=chrome&ie=UTF-8&num=21"
+
   #######
   # API #
   #######
@@ -64,7 +66,7 @@ defmodule SeoHero.Server do
   end
 
   defp get_data do
-    new_results = Fido.fetch_data
+    new_results = Fido.fetch_data(@default_url)
     {:ok, collection} = create_result_collection
 
     new_results
@@ -75,7 +77,7 @@ defmodule SeoHero.Server do
 
   # Creates a new row in result_collection and returns that collection.
   defp create_result_collection do
-    %ResultCollection{}
+    %ResultCollection{url: @default_url}
     |> ResultCollection.changeset
     |> Repo.insert
   end
