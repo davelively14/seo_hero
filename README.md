@@ -1,6 +1,6 @@
 # SeoHero
 
-This will pull the first page results from a given search on Google. The default is to search for `seo hero` from the New York location, on Chrome, with no cookies. The intent is to provide a JSON API that will provide this data to third parties.
+This will pull results for a given search on Google. The default is to search for `seo hero` from the New York location, on Chrome, with no cookies, and return the top 20 results. The intent is to provide a JSON API that will provide this data to third parties and a simple "select-copy-paste" HTML version for those who do not want to directly connect to a service that pulls ranking from Google.
 
 Current production version: 0.0.2
 
@@ -15,6 +15,10 @@ Current development version: 1.0.0a
     - Add API that returns current rankings in JSON format
 - Build a test page to pull updated results
 - Build a view that will handle JSON requests
+- Build a url generator
+  - ADJ: server.ex
+    - Provide search term (default: `seo hero`)
+    - Provide number of results (default: 20)
 
 #### Version 1.0.1
 
