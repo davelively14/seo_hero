@@ -15,15 +15,15 @@ Current development version: 1.0.0a
     - Add API that returns current rankings in JSON format
 - Build a test page to pull updated results
 - Build a view that will handle JSON requests
+
+#### Version 1.1.1
+
+- Find replacement for fetch_and_delete
+  - When deleting a result_collection, need to delete all the associated results
 - Build a url generator
   - ADJ: server.ex
     - Provide search term (default: `seo hero`)
     - Provide number of results (default: 20)
-
-#### Version 1.0.1
-
-- Find replacement for fetch_and_delete
-  - When deleting a result_collection, need to delete all the associated results
 
 ## Changelog
 
