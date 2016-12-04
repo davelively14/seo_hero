@@ -1,6 +1,6 @@
 <div class="jumbotron">
   <h3>Top 20 Results</h3>
-  <table class="table">
+  <table class="table font_8">
     <tr class="text-center">
       <th class="text-center">Rank</th>
       <th class="text-center">Domain</th>
@@ -30,7 +30,7 @@
 <div class="container">
   <h4>Copy this HTML to add to your own site</h4>
   <textarea rows="3" cols="50" onclick="this.focus();this.select();">
-    <table class="table">
+    <table class="table font_8">
       <tr class="text-center">
         <th class="text-center">Rank</th>
         <th class="text-center">Domain</th>
