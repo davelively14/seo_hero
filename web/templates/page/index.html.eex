@@ -1,15 +1,15 @@
 <div class="jumbotron">
   <h3>Top 20 Results</h3>
   <table class="table font_8">
-    <tr class="text-center">
-      <th class="text-center">Rank</th>
-      <th class="text-center">Domain</th>
-      <th class="text-center">Link</th>
+    <tr class="text-left">
+      <th class="text-left">Rank</th>
+      <th class="text-left">Domain</th>
+      <th class="text-left">Link</th>
     </tr>
     <%= for result <- @collection.results do %>
       <tr title="<%= result.snippet %>">
-        <td><%= result.rank %></td>
-        <td><%= result.domain %></td>
+        <td class="text-left"><%= result.rank %></td>
+        <td class="text-left"><%= result.domain %></td>
         <td class="text-left"><a href="<%= result.url %>"><%= result.url %></a></td>
       </tr>
     <% end %>
