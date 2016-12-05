@@ -85,7 +85,7 @@ defmodule SeoHero.Fido do
             0 ->
               nil
             1 ->
-            section |> List.first
+              section |> List.first
             _ ->
               section |> Enum.at(1) |> String.split("&") |> List.first
           end
