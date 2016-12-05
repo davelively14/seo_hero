@@ -1,7 +1,7 @@
 defmodule SeoHero.Server do
   use GenServer
   import Ecto.Query, only: [from: 2]
-  alias SeoHero.{Fido, ResultCollection, Result, Repo}
+  alias SeoHero.{Fido, ResultCollection, Result, Repo, Validate}
 
   # 2 hours
   # @default_time 2 * 60 * 60 * 1_000
@@ -65,6 +65,8 @@ defmodule SeoHero.Server do
     Process.send_after(self, :fetch, time)
   end
 
+  # Uses the Fido backend to fetch current data and stores in the Repo. Will
+  # only store relevant results.
   defp get_data do
     new_results = Fido.fetch_data(@default_url)
     {:ok, collection} = create_result_collection
@@ -88,5 +90,14 @@ defmodule SeoHero.Server do
     |> Ecto.build_assoc(:results)
     |> Result.changeset(result)
     |> Repo.insert
+  end
+
+  defp store_valid_result(result, collection) do
+    if Validate.check_domain(result.domain) do
+      collection
+      |> Ecto.build_assoc(:results)
+      |> Result.changeset(result)
+      |> Repo.insert
+    end
   end
 end
