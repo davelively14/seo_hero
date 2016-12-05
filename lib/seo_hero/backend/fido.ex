@@ -1,5 +1,5 @@
 defmodule SeoHero.Fido do
-  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&sourceid=chrome&ie=UTF-8&num=101"
+  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&sourceid=chrome&ie=UTF-8&num=201"
   @default_syntax "div.g"
   @num_page_results 9
 
@@ -79,10 +79,16 @@ defmodule SeoHero.Fido do
             _ -> cite |> elem(2) |> plain_text |> domain_only
           end
 
+        # IO.inspect resp |> Floki.find("h3.r") |> Floki.find("a") |> Floki.attribute("href") |> List.first
         url =
-          resp |> Floki.find("h3.r") |> Floki.find("a")
-          |> Floki.attribute("href") |> List.first |> String.split("?q=")
-          |> Enum.at(1) |> String.split("&") |> List.first
+          case length(section = resp |> Floki.find("h3.r") |> Floki.find("a") |> Floki.attribute("href") |> List.first |> String.split("?q=")) do
+            0 ->
+              nil
+            1 ->
+            section |> List.first
+            _ ->
+              section |> Enum.at(1) |> String.split("&") |> List.first
+          end
 
         snippet = resp |> Floki.find("span.st") |> get_snippet
 
