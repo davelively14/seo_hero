@@ -1,5 +1,5 @@
 defmodule SeoHero.Fido do
-  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&sourceid=chrome&ie=UTF-8&num=21"
+  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&sourceid=chrome&ie=UTF-8&num=101"
   @default_syntax "div.g"
   @num_page_results 9
 
@@ -27,24 +27,31 @@ defmodule SeoHero.Fido do
   # Callbacks #
   #############
 
-  # Server type of a function. Loops until it receives the relevant chunk of
+  # Server type of a function. Loops until it receives all relevant chunks of
   # data with the correct search results and returns them to calling function.
-  defp receive_results(syntax, last_ranking \\ 0) do
+  # receive_results/2 initializes the state.
+  defp receive_results(syntax, last_ranking \\ 0), do: receive_results(syntax, last_ranking, [])
+
+  defp receive_results(syntax, last_ranking, state) do
     receive do
       %HTTPoison.AsyncChunk{chunk: chunk} ->
+        # Sometimes chunks are not UTF 8 compliant. The clean function will just
+        # remove the bits that aren't. They are only in the description, so the
+        # rest of the data should remain intact.
         chunk = chunk |> clean
         case responses = Floki.find(chunk, syntax) do
           [] ->
-            receive_results(syntax)
+            receive_results(syntax, last_ranking, state)
           _ ->
-            IEx.Helpers.flush
-            parse(responses, last_ranking)
-            # responses
+            new_results = parse(responses, last_ranking)
+            new_last_ranking = last_ranking + length(new_results)
+            new_state = state ++ new_results
+            receive_results(syntax, new_last_ranking, new_state)
         end
       %HTTPoison.AsyncEnd{id: _} ->
-        {:done}
+        state
       _ ->
-        receive_results(syntax)
+        receive_results(syntax, last_ranking, state)
     end
   end
 
