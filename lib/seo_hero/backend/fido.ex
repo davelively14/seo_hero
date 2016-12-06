@@ -1,4 +1,6 @@
 defmodule SeoHero.Fido do
+  alias SeoHero.Validate
+
   @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&sourceid=chrome&ie=UTF-8&num=201"
   @default_syntax "div.g"
   @num_page_results 9
@@ -9,16 +11,19 @@ defmodule SeoHero.Fido do
 
   # Will use defaults to get the SeoHero data.
   def fetch_data do
+    IEx.Helpers.flush
     HTTPoison.get!(@default_url, %{}, stream_to: self)
     receive_results(@default_syntax)
   end
 
   # Allows user to specific which syntax and which url to go after.
   def fetch_data(urls) when is_list(urls) do
+    IEx.Helpers.flush
     get_multiple_results(urls)
   end
 
   def fetch_data(url) do
+    IEx.Helpers.flush
     HTTPoison.get!(url, %{}, stream_to: self)
     receive_results(@default_syntax)
   end
@@ -95,7 +100,11 @@ defmodule SeoHero.Fido do
         %{domain: citation, url: url, snippet: snippet}
       end
 
-    results |> Enum.filter(&(&1.domain != nil)) |> add_rank(last_ranking)
+    results
+      |> Enum.filter(&(&1.domain != nil))
+      |> add_rank(last_ranking)
+      |> Enum.map(&(if Validate.check_domain(&1.domain), do: &1, else: nil))
+      |> Enum.filter(&(&1))
   end
 
   # Will convert an HTML formatted element from Floki.find to a simple string.

@@ -13,7 +13,7 @@ defmodule SeoHero.Validate do
     clean_domain = "#{Enum.at(decon_url, length(decon_url) - 2)}.#{List.last(decon_url)}"
 
     if validation = get_validation(clean_domain) do
-      validation
+      validation.is_valid
     else
       clean_domain
       |> get_url
@@ -49,9 +49,11 @@ defmodule SeoHero.Validate do
       "io" ->
         get_io(url)
       "ninja" ->
-        get_org_ninja(url)
+        get_org(url)
+      "center" ->
+        get_org(url)
       "org" ->
-        get_org_ninja(url)
+        get_org(url)
       "co" ->
         get_co(url)
       "za" ->
@@ -68,12 +70,16 @@ defmodule SeoHero.Validate do
         # .fr does return results, but this contest does not allow for foreign
         # based domains
         false
+      "es" ->
+        false
+      "at" ->
+        false
       _ ->
         get_standard(url)
     end
   end
 
-  defp get_org_ninja(url) do
+  defp get_org(url) do
     HTTPoison.get!(url)
     |> Map.get(:body) |> String.split("Creation Date: ") |> Enum.at(1)
     |> String.split("T") |> List.first |> make_date_io
