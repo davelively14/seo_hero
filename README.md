@@ -12,6 +12,10 @@ Current development version: 0.1.0a
 
 - Fido checks validation and only returns valid results
   - I think this works. Need to test it in practice
+- Fix issues
+  - Duplicate rankings
+  - Rankings only up to 25
+  - Demmly.co should not have validated correctly
 
 #### Version 1.0.0
 
