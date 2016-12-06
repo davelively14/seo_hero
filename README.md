@@ -10,10 +10,7 @@ Current development version: 1.0.0a
 
 #### Version 1.0.0
 
-- Added Validation
-  - ADD: models/Validation.ex
-    - Persisted validation results (true/false) by domain
-    - Domain names must be unique
+- Fido checks validation and only returns valid results
 
 #### Version 1.1.0
 
@@ -40,6 +37,9 @@ Current development version: 1.0.0a
   - Aligned everything to left
 - Added Validation
   - ADD: SeoHero.Validate -> ensures sites were created during a certain time period
+  - ADD: models/Validation.ex
+    - Persisted validation results (true/false) by domain
+    - Domain names must be unique
 
 #### Version 0.1.0
 
