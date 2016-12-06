@@ -11,6 +11,7 @@ Current development version: 0.1.0a
 #### Version 0.1.0
 
 - Fido checks validation and only returns valid results
+  - I think this works. Need to test it in practice
 
 #### Version 1.0.0
 
