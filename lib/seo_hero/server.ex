@@ -9,7 +9,7 @@ defmodule SeoHero.Server do
   # 38 minutes
   @default_time 38 * 60 * 1_000
 
-  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&sourceid=chrome&ie=UTF-8&num=21"
+  @default_url "https://www.google.com/search?q=seo+hero&near=new+york,new+york&sourceid=chrome&ie=UTF-8&num=201"
 
   #######
   # API #
