@@ -4,13 +4,18 @@ This will pull results for a given search on Google. The default is to search fo
 
 Current production version: 0.0.1
 
-Current development version: 1.0.0a
+Current development version: 0.1.0a
 
 ## Todos
 
-#### Version 1.0.0
+#### Version 0.1.0
 
 - Fido checks validation and only returns valid results
+
+#### Version 1.0.0
+
+- Update table
+  - Add additional data as subtext, not just mouseover
 
 #### Version 1.1.0
 
@@ -31,7 +36,7 @@ Current development version: 1.0.0a
 
 ## Changelog
 
-#### Version 1.0.0
+#### Version 0.1.0
 
 - Changed format on index
   - Aligned everything to left
