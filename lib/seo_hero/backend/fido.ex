@@ -48,9 +48,14 @@ defmodule SeoHero.Fido do
           [] ->
             receive_results(syntax, last_ranking, state)
           _ ->
+            IO.inspect last_ranking
             new_results = parse(responses, last_ranking)
             new_last_ranking = last_ranking + length(new_results)
-            new_state = state ++ new_results
+            validated_results =
+              new_results
+              |> Enum.map(&(if Validate.check_domain(&1.domain), do: &1, else: nil))
+              |> Enum.filter(&(&1))
+            new_state = state ++ validated_results
             receive_results(syntax, new_last_ranking, new_state)
         end
       %HTTPoison.AsyncEnd{id: _} ->
@@ -102,8 +107,8 @@ defmodule SeoHero.Fido do
     results
       |> Enum.filter(&(&1.domain != nil))
       |> add_rank(last_ranking)
-      |> Enum.map(&(if Validate.check_domain(&1.domain), do: &1, else: nil))
-      |> Enum.filter(&(&1))
+      # |> Enum.map(&(if Validate.check_domain(&1.domain), do: &1, else: nil))
+      # |> Enum.filter(&(&1))
   end
 
   # Will convert an HTML formatted element from Floki.find to a simple string.
