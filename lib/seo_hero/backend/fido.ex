@@ -84,7 +84,6 @@ defmodule SeoHero.Fido do
             _ -> cite |> elem(2) |> plain_text |> domain_only
           end
 
-        # IO.inspect resp |> Floki.find("h3.r") |> Floki.find("a") |> Floki.attribute("href") |> List.first
         url =
           case length(section = resp |> Floki.find("h3.r") |> Floki.find("a") |> Floki.attribute("href") |> List.first |> String.split("?q=")) do
             0 ->
