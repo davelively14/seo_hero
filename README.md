@@ -13,7 +13,6 @@ Current development version: 0.1.0a
 - Fido checks validation and only returns valid results
   - I think this works. Need to test it in practice
 - Fix issues
-  - Duplicate rankings
   - Rankings only up to 25
   - Demmly.co should not have validated correctly
 
@@ -49,7 +48,9 @@ Current development version: 0.1.0a
   - ADD: SeoHero.Validate -> ensures sites were created during a certain time period
   - ADD: models/Validation.ex
     - Persisted validation results (true/false) by domain
-    - Domain names must be unique
+    - Domain names must be uniqu
+- Fixed errors
+  - Fixed bad rankings
 
 #### Version 0.1.0
 
