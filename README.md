@@ -10,6 +10,8 @@ Current development version: 0.1.0a
 
 #### Version 0.1.0
 
+- Supervise the validate function to prevent crashing
+  -
 - Fido checks validation and only returns valid results
   - I think this works. Need to test it in practice
 
@@ -34,6 +36,12 @@ Current development version: 0.1.0a
   - ADJ: server.ex
     - Provide search term (default: `seo hero`)
     - Provide number of results (default: 20)
+
+#### Version 1.5.0
+
+- Beat captcha on whois.com
+  - When we crash, check for the captcha and beat it
+  - Call this SeoHero.Dolores
 
 ## Changelog
 
