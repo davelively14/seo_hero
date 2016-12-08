@@ -74,6 +74,8 @@ defmodule SeoHero.Validate do
         false
       "at" ->
         false
+      "" ->
+        false
       _ ->
         get_standard(url)
     end
@@ -140,7 +142,12 @@ defmodule SeoHero.Validate do
   # Given a date, will return true if eligible or false if not. Will store
   # results in the Repo.
   defp is_valid(result_date, domain) do
-    result = result_date >= @contest_start_date
+
+    # If result_date is one of the cases that get_creation_date/1 returned as
+    # either true or false instead of a date, then this clause will catch it.
+    # Otherwise, we evaluate it as a date vs the @contest_start_date
+    result =
+      if result_date == true || result_date == false,  do: result_date, else: result_date >= @contest_start_date
 
     changeset = Validation.changeset(%Validation{}, %{domain: domain, is_valid: result})
     Repo.insert!(changeset)
