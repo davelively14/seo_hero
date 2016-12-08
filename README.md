@@ -12,9 +12,6 @@ Current development version: 0.1.0a
 
 - Fido checks validation and only returns valid results
   - I think this works. Need to test it in practice
-- Fix issues
-  - Rankings only up to 25
-  - Demmly.co should not have validated correctly
 
 #### Version 1.0.0
 
@@ -51,6 +48,7 @@ Current development version: 0.1.0a
     - Domain names must be uniqu
 - Fixed errors
   - Fixed bad rankings
+  - Fixed error where is_valid would return 'true' even if the result_date was returned false by get_creation_date
 
 #### Version 0.1.0
 
