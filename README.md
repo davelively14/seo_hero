@@ -11,7 +11,10 @@ Current development version: 0.1.0a
 #### Version 0.1.0
 
 - Supervise the validate function to prevent crashing
-  -
+  - ADD: SeoHero.ValidateSupervisor
+    - :simple_one_for_one
+    - Start supervisor from Fido?
+    - Start workers from Fido when needed?
 - Fido checks validation and only returns valid results
   - I think this works. Need to test it in practice
 
